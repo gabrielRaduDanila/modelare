@@ -1,0 +1,76 @@
+.pg-wrap {
+  max-width: 720px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 22px;
+  border-radius: 10px;
+}
+
+.pg-title {
+  margin: 0 0 12px 0;
+}
+
+.pg-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.pg-tab {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  cursor: pointer;
+}
+
+.pg-tab.active {
+  background: #fff;
+  border-color: #94a3b8;
+}
+
+.pg-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.pg-label {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.pg-input,
+.pg-select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  margin-bottom: 10px;
+}
+
+.pg-meta {
+  margin: 0 0 10px 0;
+  color: #475569;
+}
+
+.pg-primary {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.pg-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pg-danger {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ef4444;
+  background: #fff;
+  cursor: pointer;
+}

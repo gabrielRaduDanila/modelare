@@ -1,0 +1,74 @@
+.opt-panel {
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.hint {
+  color: #334155;
+  margin-top: 8px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.card {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  background: #f8fafc;
+}
+
+.card h3 {
+  margin: 0 0 10px 0;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+input {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.small {
+  font-size: 12px;
+  color: #475569;
+}
+
+.warn {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+}
+
+.result {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.details {
+  margin-top: 10px;
+}

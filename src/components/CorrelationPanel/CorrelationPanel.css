@@ -1,0 +1,21 @@
+.cp-wrap {
+  margin-top: 20px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.cp-title {
+  margin-bottom: 10px;
+}
+
+.cp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px 14px;
+}
+
+.cp-note {
+  margin-top: 10px;
+  color: #475569;
+}

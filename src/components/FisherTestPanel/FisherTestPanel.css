@@ -1,0 +1,20 @@
+.ft-wrap {
+  margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.ft-title {
+  margin-bottom: 10px;
+}
+
+.ft-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+  gap: 10px 14px;
+}
+
+.ft-concl {
+  margin-top: 12px;
+}

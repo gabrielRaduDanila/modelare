@@ -1,0 +1,31 @@
+.dt-wrap {
+  margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.dt-title {
+  margin-bottom: 10px;
+}
+
+.dt-scroll {
+  overflow-x: auto;
+}
+
+.dt-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dt-table th,
+.dt-table td {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 10px 8px;
+  text-align: left;
+}
+
+.dt-total td {
+  border-bottom: none;
+  padding-top: 12px;
+}

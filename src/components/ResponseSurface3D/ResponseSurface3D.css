@@ -1,0 +1,12 @@
+.surface {
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.note {
+  margin-top: 8px;
+  color: #475569;
+  font-size: 13px;
+}

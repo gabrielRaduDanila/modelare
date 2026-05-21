@@ -1,0 +1,53 @@
+.ccd-controls {
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.label {
+  min-width: 240px;
+  font-weight: 600;
+}
+
+.input {
+  width: 100px;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #1e293b;
+  color: white;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn.secondary {
+  background: #475569;
+}
+
+.meta {
+  margin-top: 10px;
+  color: #334155;
+}

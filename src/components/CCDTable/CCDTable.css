@@ -1,0 +1,35 @@
+.ccd-table {
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 900px;
+}
+
+th,
+td {
+  border: 1px solid #e2e8f0;
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  background: #f1f5f9;
+  font-weight: 700;
+}
+
+td input {
+  width: 120px;
+  padding: 6px;
+  font-size: 14px;
+}
