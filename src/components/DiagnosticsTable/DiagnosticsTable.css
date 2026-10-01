@@ -29,3 +29,28 @@
   border-bottom: none;
   padding-top: 12px;
 }
+
+.dt-legend {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.dt-legend > div {
+  display: flex;
+  gap: 6px;
+}
+
+.dt-legend dt {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.dt-legend dt::after {
+  content: ' –';
+}
+
+.dt-legend dd {
+  margin: 0;
+}

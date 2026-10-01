@@ -17,10 +17,10 @@ function DiagnosticsTable({ title, data }) {
           <thead>
             <tr>
               <th>Nr. Exp</th>
-              <th>Ymăs</th>
+              <th>Ymeas</th>
               <th>Ycalc</th>
-              <th>(Y−Ycalc)²</th>
-              <th>(Y−Ymed)²</th>
+              <th>(Ymeas − Ycalc)²</th>
+              <th>(Ymeas − Ȳ)²</th>
               <th>A (%)</th>
             </tr>
           </thead>
@@ -65,6 +65,25 @@ function DiagnosticsTable({ title, data }) {
           </tbody>
         </table>
       </div>
+
+      <dl className='dt-legend'>
+        <div>
+          <dt>Ymeas</dt>
+          <dd>valoarea măsurată</dd>
+        </div>
+        <div>
+          <dt>Ycalc</dt>
+          <dd>valoarea calculată cu modelul</dd>
+        </div>
+        <div>
+          <dt>Ȳ</dt>
+          <dd>media valorilor măsurate</dd>
+        </div>
+        <div>
+          <dt>A (%)</dt>
+          <dd>|Ymeas − Ycalc| / Ymeas · 100</dd>
+        </div>
+      </dl>
     </div>
   );
 }

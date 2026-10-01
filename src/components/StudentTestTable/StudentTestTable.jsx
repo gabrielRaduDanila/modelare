@@ -1,5 +1,7 @@
 import './StudentTestTable.css';
 
+import { formatPValue } from '../../utils/format';
+
 function fmt(v, d = 4) {
   const n = Number(v);
   return Number.isFinite(n) ? n.toFixed(d) : '—';
@@ -40,8 +42,8 @@ function StudentTestTable({ title, result }) {
                 <td>{fmt(r.b, 4)}</td>
                 <td>{fmt(r.se, 4)}</td>
                 <td>{fmt(r.t, 4)}</td>
-                <td>{fmt(r.pValue, 6)}</td>
-                <td>{r.significant ? 'DA' : 'NU'}</td>
+                <td>{formatPValue(r.pValue)}</td>
+                <td>{r.significant ? 'yes' : 'no'}</td>
               </tr>
             ))}
           </tbody>

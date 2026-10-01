@@ -1,16 +1,160 @@
-# React + Vite
+# optimizare-emulsii
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A browser application for the experimental optimization of emulsions using a
+**rotatable central composite design (CCD)** with two factors and a
+**second-order regression model**. It generates the experimental plan, fits the
+model to measured responses, runs the statistical tests required to validate it
+(Student, Fisher), and plots the response surface.
 
-Currently, two official plugins are available:
+**Live application:** https://gabrielradudanila.github.io/optimizare-emulsii/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Everything runs client-side; no data leaves the browser. Projects are stored in
+the browser's local storage and the experimental plan can be exported as CSV.
 
-## React Compiler
+## What it computes
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Rotatable CCD for 2 factors: 4 factorial points, 4 axial points
+  (α = √2 ≈ 1.414) and a user-defined number of replicated center points.
+- Second-order regression coefficients by ordinary least squares.
+- Standard errors, Student *t* test and *p*-values for every coefficient.
+- Fisher test for model adequacy against the pure error of the center points.
+- Coefficient of determination *R²*, adjusted *R²*, and a per-run diagnostics
+  table with relative errors.
+- 3D response surface and 2D contour plot of the fitted model.
 
-## Expanding the ESLint configuration
+## How to use it
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Create a project (it is kept in local storage and saved automatically).
+2. Enter the two factors with their lower and upper levels. These levels are the
+   coded levels −1 and +1; the axial points fall outside this interval.
+3. Set the number of center-point replicates (5 in the classic design; at least
+   2 are required for the Fisher test).
+4. Press **Generează CCD**. The table lists every run with both the coded and
+   the real factor values.
+5. Enter the measured responses. One or more responses can be analyzed; each
+   one is fitted separately.
+6. Press **Analizează**. The coefficients, the statistical tests, the
+   diagnostics table and the plots appear below the table.
+
+## Formulas
+
+**Coding of the factors.** For factor *i*, with *C<sub>i0</sub>* the center
+value and *ΔC<sub>i</sub>* the step between the center and the ±1 level:
+
+```
+xi = (Ci − Ci0) / ΔCi
+```
+
+With the lower/upper levels *C<sub>i,min</sub>* and *C<sub>i,max</sub>* entered
+in the application, *C<sub>i0</sub>* = (*C<sub>i,min</sub>* + *C<sub>i,max</sub>*)/2
+and Δ*C<sub>i</sub>* = (*C<sub>i,max</sub>* − *C<sub>i,min</sub>*)/2. The axial
+points therefore lie at *C<sub>i0</sub>* ± α·Δ*C<sub>i</sub>*.
+
+**Model.**
+
+```
+y = b0 + b1·x1 + b2·x2 + b11·x1² + b22·x2² + b12·x1·x2
+```
+
+**Coefficients.** Fitted by ordinary least squares on the coded factors, for any
+number of center-point replicates:
+
+```
+b = (XᵀX)⁻¹ Xᵀ y
+```
+
+where the row of *X* for a run is `[1, x1, x2, x1², x2², x1·x2]`. The system is
+solved by Gauss–Jordan elimination with partial pivoting.
+
+**Residual variance.** With *n* runs and *p* = 6 coefficients:
+
+```
+s²res = Σ(Ymeas − Ycalc)² / (n − p)
+```
+
+**Standard errors and Student test.**
+
+```
+SE(bj) = sqrt(s²res · cjj),   cjj = diagonal element j of (XᵀX)⁻¹
+t = |bj| / SE(bj),            df = n − p
+```
+
+A coefficient is significant at α = 0.05 when |*t*| ≥ *t*(0.025; *n* − *p*).
+
+**Reproducibility variance from the center points.** With *n₀* center runs and
+*ȳ₀* their mean:
+
+```
+s0² = Σ(yi0 − ȳ0)² / (n0 − 1)
+```
+
+**Fisher test for model adequacy.**
+
+```
+Fc = s²res / s0²
+```
+
+compared with *F*(0.05; *n* − *p*; *n₀* − 1). The model is adequate when
+*Fc* ≤ *F*<sub>tab</sub>.
+
+**Goodness of fit.**
+
+```
+R²     = 1 − SSE / SST
+R²adj  = 1 − [SSE / (n − p)] / [SST / (n − 1)]
+A (%)  = |Ymeas − Ycalc| / Ymeas · 100
+```
+
+where SSE = Σ(Ymeas − Ycalc)² and SST = Σ(Ymeas − Ȳ)².
+
+## Center-point replicates
+
+All center-point replicates are kept as individual runs in the regression: they
+enter *X* and *y* like any other run, so *n* grows with the number of replicates
+and the least-squares coefficients change accordingly. Their only special role
+is in the Fisher test, where they provide the pure-error estimate *s0²* with
+*n₀* − 1 degrees of freedom. At least two center points are therefore required
+for the adequacy test.
+
+## Example input
+
+Two factors, *x₁* between 1 and 2 %, *x₂* between 1 and 3 %, 5 center points
+(13 runs). Responses entered in the order generated by the application:
+
+| Run | Type | x₁ (coded) | x₂ (coded) | x₁ (%) | x₂ (%) | y |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | factorial | −1 | −1 | 1.000 | 1.000 | 7.4894 |
+| 2 | factorial | +1 | −1 | 2.000 | 1.000 | 8.6894 |
+| 3 | factorial | −1 | +1 | 1.000 | 3.000 | 45.3758 |
+| 4 | factorial | +1 | +1 | 2.000 | 3.000 | 47.4689 |
+| 5 | axial | −√2 | 0 | 0.793 | 2.000 | 5.9526 |
+| 6 | axial | +√2 | 0 | 2.207 | 2.000 | 6.7345 |
+| 7 | axial | 0 | −√2 | 1.500 | 0.586 | 20.6893 |
+| 8 | axial | 0 | +√2 | 1.500 | 3.414 | 75.2644 |
+| 9–13 | center | 0 | 0 | 1.500 | 2.000 | 5.5478, 5.3454, 4.9856, 5.1853, 5.7397 |
+
+Fitted model:
+
+```
+y = 5.3608 + 0.5499·x1 + 19.2308·x2 + 0.5153·x1² + 21.3320·x2² + 0.2233·x1·x2
+```
+
+with SE = 0.1690 / 0.1336 / 0.1336 / 0.1433 / 0.1433 / 0.1890, *p*(b₁₂) = 0.276
+(the only non-significant coefficient at α = 0.05), *Fc* = 1.6308 against
+*F*<sub>tab</sub> = 6.0942 (adequate), *R²* = 0.9998 and *R²*<sub>adj</sub> = 0.9997.
+
+## Development
+
+```bash
+npm ci        # install dependencies
+npm run dev   # development server
+npm test      # unit tests (regression and formatting)
+npm run build # production build into dist/
+```
+
+Built with React and Vite; plots with Plotly; distributions with jStat.
+Deployed to GitHub Pages by the workflow in `.github/workflows`.
+
+## License
+
+MIT — see [LICENSE](LICENSE).

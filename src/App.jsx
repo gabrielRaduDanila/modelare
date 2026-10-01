@@ -18,7 +18,7 @@ import ProjectGate from './components/ProjectGate/ProjectGate';
 
 import { generateCCD2FactorsRotatable } from './utils/ccd';
 import { exportCCDToCSV } from './utils/csv';
-import { quadraticRegression2FactorsPaper } from './utils/regression';
+import { quadraticRegression2Factors } from './utils/regression';
 import { correlation2Factors } from './utils/correlation';
 
 import {
@@ -268,7 +268,7 @@ function App() {
   function handleAnalyze() {
     const nextModels = {};
     for (const rDef of responseDefs) {
-      nextModels[rDef.key] = quadraticRegression2FactorsPaper(
+      nextModels[rDef.key] = quadraticRegression2Factors(
         ccdRuns,
         rDef.key,
       );
