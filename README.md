@@ -1,4 +1,4 @@
-# optimizare-emulsii
+# modelare
 
 A browser application for the experimental optimization of emulsions using a
 **rotatable central composite design (CCD)** with two factors and a
@@ -6,7 +6,7 @@ A browser application for the experimental optimization of emulsions using a
 model to measured responses, runs the statistical tests required to validate it
 (Student, Fisher), and plots the response surface.
 
-**Live application:** https://gabrielradudanila.github.io/optimizare-emulsii/
+**Live application:** https://gabrielradudanila.github.io/modelare/
 
 Everything runs client-side; no data leaves the browser. Projects are stored in
 the browser's local storage and the experimental plan can be exported as CSV.

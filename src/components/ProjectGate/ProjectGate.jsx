@@ -9,7 +9,7 @@ function formatDate(ts) {
 
 function ProjectGate({ projects, onCreate, onOpen, onDelete }) {
   const [mode, setMode] = useState(projects.length ? 'open' : 'new');
-  const [newName, setNewName] = useState('Optimizare emulsie');
+  const [newName, setNewName] = useState('Modelare');
   const [selectedId, setSelectedId] = useState(projects[0]?.id ?? '');
 
   const selected = useMemo(
