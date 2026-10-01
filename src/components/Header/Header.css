@@ -4,3 +4,21 @@
   padding: 20px;
   border-radius: 8px;
 }
+
+.header h1 {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+}
+
+.header-version {
+  font-size: 13px;
+  font-weight: 500;
+  color: #cbd5e1;
+  border: 1px solid #475569;
+  border-radius: 999px;
+  padding: 2px 9px;
+  white-space: nowrap;
+}
